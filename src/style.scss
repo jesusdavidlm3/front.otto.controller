@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Sigmar&display=swap');
+
+:root{
+    --moduleColor: #111a2c;
+    --bgColor: #001d66
+}
+
+body{
+    margin: 0;
+    color: white;
+    font-family: "Sigmar", serif;
+}
+
+.App{
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bgColor);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center ;
+    gap: 25px;
+
+    .info{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        h1, h3{margin: 0;}
+    }
+
+    .sectionOne{
+        background-color: var(--moduleColor);
+        padding: 25px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .sectionTwo{
+        background-color: var(--moduleColor);
+        padding: 25px;
+        border-radius: 10px;
+        display: flex;
+        gap: 30px;
+    }
+
+}
