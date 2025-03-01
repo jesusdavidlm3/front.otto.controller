@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { DownOutlined, UpOutlined, RedoOutlined, UndoOutlined, StopOutlined, LoadingOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
+import axios from 'axios'
 
-function App() {
+const App = () => {
 
-  const [status, setStatus] = useState<string>('Conectando  ')
+  const address = "http://localhost:8000/otto"
+  const [status, setStatus] = useState<string>('Conectando')
   const [action, setAction] = useState<string>("Otto esperando instrucciones")
   const [conected, setConected] = useState<boolean>(false)
 
@@ -17,24 +19,56 @@ function App() {
     height: '100px'
   }
 
+  const testConnection = async() => {
+    try{
+      const res = await axios.get(`${address}/testConnection`, {timeout: 1000})
+      if(res.status == 200){
+        setConected(true)
+        setStatus("En linea")
+      }
+    }catch(err){
+      setConected(false)
+      setStatus("Conectando")
+    }
+  }
+
+  useEffect(() => {
+    setInterval(testConnection, 3000)
+  }, [])
+
   const frontButton = async() => {
-    setAction("Avanzando")
+    const res = await axios.get(`${address}/fordward`)
+    if(res.status == 200){
+      setAction("Avanzando")
+    }
   }
 
   const backButton = async() => {
-    setAction("Retrocediendo")
+    const res = await axios.get(`${address}/backward`)
+    if(res.status == 200){
+      setAction("Retrocediendo")
+    }
   }
 
   const leftButton = async() => {
-    setAction("Girando izquierda")
+    const res = await axios.get(`${address}/left`)
+    if(res.status == 200){
+      setAction("Girando a la izquierda")
+    }
   }
 
   const rightButton = async() => {
-    setAction("Girando derecha")
+    const res = await axios.get(`${address}/right`)
+    if(res.status == 200){
+      setAction("Girando a la derecha")
+    }
   }
 
   const stopButton = async() => {
-    setAction("Otto esperando instrucciones")
+    const res = await axios.get(`${address}/stop`)
+    if(res.status == 200){
+      setAction("Otto esperando instrucciones")
+    }
   }
 
   return (
