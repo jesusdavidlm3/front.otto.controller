@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const App = () => {
 
-  const address = "http://localhost:8000/otto"
+  const address = "http://192.168.31.91:80/otto"
   const [status, setStatus] = useState<string>('Conectando')
   const [action, setAction] = useState<string>("Otto esperando instrucciones")
   const [conected, setConected] = useState<boolean>(false)
